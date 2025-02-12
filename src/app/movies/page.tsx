@@ -1,9 +1,13 @@
 "use client";
 
+// REACT
 import { useState } from "react";
-import { FaSearch, FaStar } from "react-icons/fa";
+
+// STYLES
 import { motion } from "framer-motion";
-import Image from "next/image";
+
+// COMPONENTS
+import { Paginations, MovieSearch, MoviesList } from "@/components";
 
 const dummyMovies = [
   {
@@ -47,6 +51,14 @@ const dummyMovies = [
 export default function MoviesPage() {
   const [query, setQuery] = useState("");
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const moviesPerPage = 8;
+  const totalPages = Math.ceil(dummyMovies.length / moviesPerPage);
+
+  const indexOfLastMovie = currentPage * moviesPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+  const currentMovies = dummyMovies.slice(indexOfFirstMovie, indexOfLastMovie);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Searching for:", query);
@@ -63,82 +75,19 @@ export default function MoviesPage() {
           Discover Movies
         </motion.h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <form onSubmit={handleSubmit} className="max-w-2xl">
-            <div className="relative">
-              <input
-                type="text"
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                placeholder="Search for movies..."
-                className="w-full px-6 py-4 rounded-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#F76641]/50 text-lg placeholder-gray-400"
-              />
-              <motion.button
-                type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#F76641] text-white p-4 rounded-full hover:bg-opacity-90 transition duration-300"
-              >
-                <FaSearch className="text-lg" />
-              </motion.button>
-            </div>
-          </form>
-        </motion.div>
+        <MovieSearch
+          handleSubmit={handleSubmit}
+          query={query}
+          setQuery={setQuery}
+        />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-        >
-          {dummyMovies.map((movie, index) => (
-            <motion.div
-              key={movie.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-[#F76641]/20"
-            >
-              <div className="relative aspect-[2/3]">
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-300 hover:scale-105"
-                />
-                <div className="absolute top-4 right-4 bg-[#F76641] rounded-full px-3 py-1 flex items-center gap-1">
-                  <FaStar className="text-yellow-300" />
-                  <span className="text-white font-semibold">
-                    {movie.vote_average.toFixed(1)}
-                  </span>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2 line-clamp-1">
-                  {movie.title}
-                </h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  {new Date(movie.release_date).getFullYear()}
-                </p>
-                <p className="text-gray-300 text-sm line-clamp-3">
-                  {movie.overview}
-                </p>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full mt-6 bg-[#F76641] text-white px-6 py-3 rounded-xl hover:bg-opacity-90 transition duration-300 font-semibold"
-                >
-                  View Details
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        <MoviesList currentMovies={currentMovies} />
+
+        <Paginations
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   );
