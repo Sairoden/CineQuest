@@ -1,6 +1,12 @@
+// NEXT
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
+// STYLES
 import "./globals.css";
+
+// COMPONENTS
+import { Footer, ScrollTransition, Navbar } from "@/components";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +34,12 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ScrollTransition />
+
+        <Navbar />
         {children}
+
+        <Footer />
       </body>
     </html>
   );
