@@ -99,6 +99,7 @@ export default function Hero() {
                   <FaPlay className="mr-2 transition-transform duration-300 group-hover:rotate-90" />
                   Begin Your CineQuest Journey
                 </span>
+
                 <div className="absolute inset-0 bg-gradient-to-r from-[#2A2E3F] to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-0" />
               </Link>
             </motion.div>

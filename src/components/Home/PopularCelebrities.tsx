@@ -11,46 +11,25 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Dummy Data
-const celebrities = [
-  {
-    id: 1,
-    name: "Tom Cruise",
-    profile_path: "/eOh4ubpOm2Igdg0QH2ghj0mFtC.jpg",
-    popularity: 98.5,
-    known_for_department: "Acting",
-  },
-  {
-    id: 2,
-    name: "Margot Robbie",
-    profile_path: "/euDPyqLnuwaWMHajcU3oZ9uZezR.jpg",
-    popularity: 95.2,
-    known_for_department: "Acting",
-  },
-  {
-    id: 3,
-    name: "Ryan Gosling",
-    profile_path: "/lyUyVARQKhGxaxy0FbPJCQRpiaW.jpg",
-    popularity: 94.8,
-    known_for_department: "Acting",
-  },
-  {
-    id: 4,
-    name: "Emma Stone",
-    profile_path: "/vQBwmsSOAd0JDaEcZ5p43J9xzsY.jpg",
-    popularity: 93.7,
-    known_for_department: "Acting",
-  },
-  {
-    id: 5,
-    name: "Leonardo DiCaprio",
-    profile_path: "/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg",
-    popularity: 92.4,
-    known_for_department: "Acting",
-  },
-];
+// HOOKS
+import { useGetPopularPeople } from "@/hooks";
+
+// COMPONENTS
+import { LoadingSpinner } from "@/components";
+
+interface PopularCelebritiesProps {
+  people: {
+    id: number;
+    name: string;
+    popularity: number;
+    profile_path: string;
+    known_for_department: string;
+  }[];
+}
 
 export default function PopularCelebrities() {
+  const { data, isPending } = useGetPopularPeople();
+
   const settings = {
     dots: true,
     infinite: true,
@@ -84,6 +63,8 @@ export default function PopularCelebrities() {
     ],
   };
 
+  if (isPending) return <LoadingSpinner />;
+
   return (
     <div className="bg-gray-900 py-16">
       <div className="container mx-auto px-4 max-w-[1536px]">
@@ -100,60 +81,64 @@ export default function PopularCelebrities() {
 
         <div className="px-8 md:px-10">
           <Slider {...settings}>
-            {celebrities.map((celebrity, index) => (
-              <div key={celebrity.id} className="px-4">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-[#F76641]/20"
-                >
-                  <div className="relative aspect-[2/3]">
-                    <Image
-                      src={
-                        celebrity.profile_path
-                          ? `https://image.tmdb.org/t/p/w500${celebrity.profile_path}`
-                          : "/noProfile.png"
-                      }
-                      alt={celebrity.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, 
+            {(data?.results as PopularCelebritiesProps["people"])?.map(
+              (celebrity, index) => (
+                <div key={celebrity.id} className="px-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-[#F76641]/20"
+                  >
+                    <div className="relative aspect-[2/3]">
+                      <Image
+                        src={
+                          celebrity.profile_path
+                            ? `https://image.tmdb.org/t/p/w500${celebrity.profile_path}`
+                            : "/noProfile.png"
+                        }
+                        alt={celebrity.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 
                              (max-width: 1024px) 50vw, 
                              (max-width: 1280px) 33vw,
                              25vw"
-                      className="object-cover"
-                      priority={index < 4}
-                    />
+                        className="object-cover"
+                        priority={index < 4}
+                      />
 
-                    <div className="absolute top-4 right-4 bg-[#F76641] rounded-full px-3 py-1 flex items-center gap-1">
-                      <FaChartLine className="text-yellow-300" />
+                      {celebrity.popularity && (
+                        <div className="absolute top-4 right-4 bg-[#F76641] rounded-full px-3 py-1 flex items-center gap-1">
+                          <FaChartLine className="text-yellow-300" />
 
-                      <span className="text-white font-semibold">
-                        {celebrity.popularity.toFixed(1)}
-                      </span>
+                          <span className="text-white font-semibold">
+                            {String(celebrity.popularity.toFixed(1))}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                  </div>
 
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-2 line-clamp-1">
-                      {celebrity.name}
-                    </h3>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-white mb-2 line-clamp-1">
+                        {celebrity.name}
+                      </h3>
 
-                    <p className="text-gray-400 text-sm">
-                      {celebrity.known_for_department}
-                    </p>
+                      <p className="text-gray-400 text-sm">
+                        {celebrity.known_for_department}
+                      </p>
 
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full mt-6 bg-[#F76641] text-white px-6 py-3 rounded-xl hover:bg-opacity-90 transition duration-300 font-semibold"
-                    >
-                      View Profile
-                    </motion.button>
-                  </div>
-                </motion.div>
-              </div>
-            ))}
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full mt-6 bg-[#F76641] text-white px-6 py-3 rounded-xl hover:bg-opacity-90 transition duration-300 font-semibold"
+                      >
+                        View Profile
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                </div>
+              )
+            )}
           </Slider>
         </div>
       </div>

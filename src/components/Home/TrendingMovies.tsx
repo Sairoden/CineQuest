@@ -5,10 +5,13 @@ import Image from "next/image";
 
 // STYLES
 import { motion } from "framer-motion";
-import { FaFire, FaCalendarAlt, FaChartLine } from "react-icons/fa";
+import { FaFire, FaCalendarAlt, FaStar } from "react-icons/fa";
 
 // HOOKS
 import { useGetTrendingMovies } from "@/hooks";
+
+// COMPONENTS
+import { LoadingSpinner } from "@/components";
 
 interface TrendingMoviesProps {
   movies: {
@@ -22,7 +25,9 @@ interface TrendingMoviesProps {
 }
 
 export default function TrendingMovies() {
-  const { data } = useGetTrendingMovies();
+  const { data, isPending } = useGetTrendingMovies();
+
+  if (isPending) return <LoadingSpinner />;
 
   return (
     <div className="bg-[#2A2E3F] py-16">
@@ -69,7 +74,7 @@ export default function TrendingMovies() {
 
                   {movie.vote_average && (
                     <div className="absolute top-4 right-4 bg-[#F76641] rounded-full px-3 py-1 flex items-center gap-1">
-                      <FaChartLine className="text-yellow-300" />
+                      <FaStar className="text-yellow-300" />
 
                       <span className="text-white font-semibold">
                         {String(movie.vote_average?.toFixed(1))}

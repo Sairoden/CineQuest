@@ -31,7 +31,7 @@ export const getAllMovies = async ({
 export const getTrendingMovies = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/trendingMovies`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/movies/trendingMovies`
     );
 
     const data = await res.json();

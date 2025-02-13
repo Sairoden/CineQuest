@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function LoadingSpinner() {
   return (
     <div className="min-h-screen bg-gray-900">
-      <div className="fixed inset-0 flex items-center justify-center">
+      <div className="flex pt-60 items-center justify-center">
         <div className="flex flex-col items-center justify-center gap-4">
           <motion.div
             className="relative w-32 h-32"

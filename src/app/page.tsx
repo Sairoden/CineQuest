@@ -18,11 +18,9 @@ export default function HomePage() {
       <main className="flex-grow">
         <Hero />
 
-        <Carousel />
-
-        <PopularCelebrities />
-
         <Suspense fallback={<LoadingSpinner />}>
+          <Carousel />
+          <PopularCelebrities />
           <TrendingMovies />
         </Suspense>
 
