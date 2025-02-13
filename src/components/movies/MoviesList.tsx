@@ -6,7 +6,7 @@ import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 
 interface MoviesListProps {
-  currentMovies: {
+  movies: {
     id: number;
     title: string;
     overview: string;
@@ -16,7 +16,7 @@ interface MoviesListProps {
   }[];
 }
 
-export default function MoviesList({ currentMovies }: MoviesListProps) {
+export default function MoviesList({ movies }: MoviesListProps) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -24,7 +24,7 @@ export default function MoviesList({ currentMovies }: MoviesListProps) {
       transition={{ duration: 0.5 }}
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
     >
-      {currentMovies.map((movie, index) => (
+      {movies.map((movie, index) => (
         <motion.div
           key={movie.id}
           initial={{ opacity: 0, y: 20 }}
@@ -37,9 +37,14 @@ export default function MoviesList({ currentMovies }: MoviesListProps) {
             <Image
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-300 hover:scale-105"
+              fill
+              sizes="(max-width: 640px) 100vw, 
+                     (max-width: 1024px) 50vw, 
+                     (max-width: 1280px) 33vw,
+                     25vw"
+              quality={85}
+              priority={index < 4}
+              className="transition-transform duration-300 hover:scale-105 object-cover"
             />
 
             <div className="absolute top-4 right-4 bg-[#F76641] rounded-full px-3 py-1 flex items-center gap-1">

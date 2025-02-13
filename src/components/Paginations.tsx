@@ -5,15 +5,15 @@ import React from "react";
 import { motion } from "framer-motion";
 
 interface PaginationsProps {
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   currentPage: number;
   totalPages: number;
+  handlePage: (page: number) => void;
 }
 
 export default function Paginations({
-  setCurrentPage,
   currentPage,
   totalPages,
+  handlePage,
 }: PaginationsProps) {
   const getPageRange = () => {
     const range = [];
@@ -48,7 +48,7 @@ export default function Paginations({
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          onClick={() => handlePage(currentPage - 1)}
           disabled={currentPage === 1}
           className={`flex items-center justify-center w-10 h-10 rounded-full
         transition-all duration-300 ${
@@ -77,7 +77,7 @@ export default function Paginations({
               key={pageNum}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setCurrentPage(pageNum)}
+              onClick={() => handlePage(pageNum)}
               className={`relative w-10 h-10 flex items-center justify-center rounded-full
             font-medium transition-all duration-300 ${
               currentPage === pageNum
@@ -101,7 +101,7 @@ export default function Paginations({
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          onClick={() => handlePage(currentPage + 1)}
           disabled={currentPage === totalPages}
           className={`flex items-center justify-center w-10 h-10 rounded-full
         transition-all duration-300 ${
@@ -128,7 +128,7 @@ export default function Paginations({
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => setCurrentPage(1)}
+          onClick={() => handlePage(1)}
           disabled={currentPage === 1}
           className="text-sm text-gray-400 hover:text-[#F76641] transition-colors"
         >
@@ -138,7 +138,7 @@ export default function Paginations({
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => setCurrentPage(totalPages)}
+          onClick={() => handlePage(totalPages)}
           disabled={currentPage === totalPages}
           className="text-sm text-gray-400 hover:text-[#F76641] transition-colors"
         >

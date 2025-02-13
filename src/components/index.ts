@@ -2,6 +2,8 @@ export { default as ScrollTransition } from "./ScrollTransition";
 export { default as Navbar } from "./Navbar";
 export { default as Footer } from "./Footer";
 export { default as Paginations } from "./Paginations";
+export { default as Providers } from "./Providers";
+export { default as LoadingSpinner } from "./LoadingSpinner";
 
 // HOME
 export { default as Hero } from "./home/Hero";
