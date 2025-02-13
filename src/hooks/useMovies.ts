@@ -8,17 +8,18 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
 // SERVICES
-import { getAllMovies } from "@/services";
+import { getAllMovies, getTrendingMovies } from "@/services";
 
 export const useGetAllMovies = () => {
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
 
   const page = searchParams.get("page") ?? "1";
+  const query = searchParams.get("query") ?? "";
 
   const { data, isPending } = useQuery({
-    queryKey: ["movies", page],
-    queryFn: () => getAllMovies({ page: +page }),
+    queryKey: ["movies", page, query],
+    queryFn: () => getAllMovies({ page: +page, query }),
   });
 
   useEffect(() => {
@@ -36,6 +37,15 @@ export const useGetAllMovies = () => {
       });
     }
   }, [page, queryClient]);
+
+  return { data, isPending };
+};
+
+export const useGetTrendingMovies = () => {
+  const { data, isPending } = useQuery({
+    queryKey: ["trendingMovies"],
+    queryFn: getTrendingMovies,
+  });
 
   return { data, isPending };
 };

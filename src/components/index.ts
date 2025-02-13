@@ -7,9 +7,9 @@ export { default as LoadingSpinner } from "./LoadingSpinner";
 
 // HOME
 export { default as Hero } from "./home/Hero";
-export { default as TrendingMovies } from "./home/TrendingMovies";
+export { default as Carousel } from "./home/Carousel";
 export { default as PopularCelebrities } from "./home/PopularCelebrities";
-export { default as TopBoxOffice } from "./home/TopBoxOffice";
+export { default as TrendingMovies } from "./home/TrendingMovies";
 export { default as LatestReviews } from "./home/LatestReviews";
 export { default as Newsletter } from "./home/Newsletter";
 

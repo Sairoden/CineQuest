@@ -1,3 +1,3 @@
 // MOVIES
-import { getAllMovies } from "./apiMovies";
-export { getAllMovies };
+import { getAllMovies, getTrendingMovies } from "./apiMovies";
+export { getAllMovies, getTrendingMovies };

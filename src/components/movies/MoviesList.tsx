@@ -17,6 +17,11 @@ interface MoviesListProps {
 }
 
 export default function MoviesList({ movies }: MoviesListProps) {
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength) + "...";
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -31,11 +36,15 @@ export default function MoviesList({ movies }: MoviesListProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
           whileHover={{ y: -10 }}
-          className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-[#F76641]/20"
+          className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-[#F76641]/20 flex flex-col h-full"
         >
           <div className="relative aspect-[2/3]">
             <Image
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : "/noPoster.png"
+              }
               alt={movie.title}
               fill
               sizes="(max-width: 640px) 100vw, 
@@ -47,26 +56,34 @@ export default function MoviesList({ movies }: MoviesListProps) {
               className="transition-transform duration-300 hover:scale-105 object-cover"
             />
 
-            <div className="absolute top-4 right-4 bg-[#F76641] rounded-full px-3 py-1 flex items-center gap-1">
-              <FaStar className="text-yellow-300" />
-              <span className="text-white font-semibold">
-                {movie.vote_average.toFixed(1)}
-              </span>
-            </div>
+            {movie.vote_average && (
+              <div className="absolute top-4 right-4 bg-[#F76641] rounded-full px-3 py-1 flex items-center gap-1">
+                <FaStar className="text-yellow-300" />
+                <span className="text-white font-semibold">
+                  {String(movie.vote_average?.toFixed(1))}
+                </span>
+              </div>
+            )}
           </div>
 
-          <div className="p-6">
-            <h3 className="text-xl font-bold text-white mb-2 line-clamp-1">
-              {movie.title}
-            </h3>
+          <div className="p-6 flex flex-col flex-grow">
+            <div className="flex-grow">
+              <h3 className="text-xl font-bold text-white mb-2 line-clamp-1">
+                {movie.title}
+              </h3>
 
-            <p className="text-gray-400 text-sm mb-4">
-              {new Date(movie.release_date).getFullYear()}
-            </p>
+              <p className="text-gray-400 text-sm mb-4">
+                {movie.release_date
+                  ? new Date(movie.release_date).getFullYear()
+                  : "No Date"}
+              </p>
 
-            <p className="text-gray-300 text-sm line-clamp-3">
-              {movie.overview}
-            </p>
+              <p className="text-gray-300 text-sm min-h-[4.5rem]">
+                {movie.overview
+                  ? truncateText(movie.overview, 80)
+                  : "No overview"}
+              </p>
+            </div>
 
             <motion.button
               whileHover={{ scale: 1.05 }}

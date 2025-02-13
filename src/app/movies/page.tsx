@@ -31,11 +31,21 @@ export default function MoviesPage() {
     return <LoadingSpinner />;
   }
 
-  const { page, results: movies, total_pages: totalPages } = data;
+  const { page = 1, results: movies = [], total_pages: totalPages = 1 } = data;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Searching for:", query);
+
+    const params = new URLSearchParams(searchParams);
+
+    if (query) {
+      params.set("query", query);
+      params.set("page", "1");
+    } else {
+      params.delete("query");
+    }
+
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   const handlePage = (page: number) => {

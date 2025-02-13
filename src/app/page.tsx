@@ -1,11 +1,15 @@
+// REACT
+import { Suspense } from "react";
+
 // COMPONENTS
 import {
   Hero,
-  TrendingMovies,
+  Carousel,
   PopularCelebrities,
-  TopBoxOffice,
+  TrendingMovies,
   LatestReviews,
   Newsletter,
+  LoadingSpinner,
 } from "@/components";
 
 export default function HomePage() {
@@ -13,16 +17,18 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
         <Hero />
-        <TrendingMovies />
+
+        <Carousel />
+
         <PopularCelebrities />
-        <TopBoxOffice />
+
+        <Suspense fallback={<LoadingSpinner />}>
+          <TrendingMovies />
+        </Suspense>
+
         <LatestReviews />
+
         <Newsletter />
-        {/* <TrendingMovies />
-        <PopularCelebrities />
-        <TopBoxOffice />
-        <LatestReviews />
-        <Newsletter /> */}
       </main>
     </div>
   );

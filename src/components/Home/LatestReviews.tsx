@@ -6,6 +6,7 @@ import Image from "next/image";
 // STYLES
 import { motion } from "framer-motion";
 import { FaStar, FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
+import { MdRateReview } from "react-icons/md";
 
 const reviews = [
   {
@@ -37,14 +38,15 @@ export default function LatestReviews() {
   return (
     <div className="bg-gray-900 py-16">
       <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-4xl font-bold mb-12 text-center text-white"
+        <motion.div
+          className="flex items-center justify-center gap-3 mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Latest Reviews
-        </motion.h2>
+          <MdRateReview className="text-4xl text-[#F76641]" />
+          <h2 className="text-4xl font-bold text-white">Latest Reviews</h2>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {reviews.map((review, index) => (

@@ -20,9 +20,9 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1536px; /* 2xl breakpoint */
+  width: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
 }
 
 .text-gradient {
@@ -34,4 +34,12 @@ body {
 
 .hero-gradient {
   background-image: linear-gradient(135deg, #f76641 0%, #ff8a6a 100%);
+}
+
+.slick-dots li button:before {
+  color: #f76641 !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #f76641 !important;
 }
