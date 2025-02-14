@@ -6,6 +6,7 @@ export { default as Providers } from "./Providers";
 export { default as LoadingSpinner } from "./LoadingSpinner";
 export { default as MediaSearch } from "./MediaSearch";
 export { default as MediaList } from "./MediaList";
+export { default as MediaCard } from "./MediaCard";
 
 // HOME
 export { default as Hero } from "./home/Hero";
