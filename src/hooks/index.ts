@@ -1,6 +1,10 @@
 // MOVIES
-import { useGetAllMovies, useGetTrendingMovies } from "./useMovies";
-export { useGetAllMovies, useGetTrendingMovies };
+import {
+  useGetAllMovies,
+  useGetTrendingMovies,
+  useGetMovie,
+} from "./useMovies";
+export { useGetAllMovies, useGetTrendingMovies, useGetMovie };
 
 // PEOPLE
 import { useGetPopularPeople } from "./usePeople";

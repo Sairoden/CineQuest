@@ -27,9 +27,7 @@ export default function SeriesPage() {
   const router = useRouter();
   const pathname = usePathname();
 
-  if (isPending) {
-    return <LoadingSpinner />;
-  }
+  if (isPending) return <LoadingSpinner />;
 
   const { page = 1, results: series = [], total_pages: totalPages = 1 } = data;
 
@@ -72,7 +70,7 @@ export default function SeriesPage() {
           placeholder="Search for tv shows..."
         />
 
-        <MediaList items={series} />
+        <MediaList items={series} type="series" />
 
         <Paginations
           totalPages={totalPages}

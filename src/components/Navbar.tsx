@@ -25,8 +25,6 @@ export default function Navbar() {
   const { user } = useGetCurrentUser();
   const { logout, isPending } = useLogout();
 
-  console.log("MY USER", user);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {

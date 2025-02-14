@@ -27,9 +27,7 @@ export default function MoviesPage() {
   const router = useRouter();
   const pathname = usePathname();
 
-  if (isPending) {
-    return <LoadingSpinner />;
-  }
+  if (isPending) return <LoadingSpinner />;
 
   const { page = 1, results: movies = [], total_pages: totalPages = 1 } = data;
 
@@ -72,7 +70,7 @@ export default function MoviesPage() {
           placeholder="Search for movies..."
         />
 
-        <MediaList items={movies} />
+        <MediaList items={movies} type="movies" />
 
         <Paginations
           totalPages={totalPages}

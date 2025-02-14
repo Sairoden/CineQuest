@@ -15,9 +15,10 @@ interface MediaListProps {
     first_air_date?: string;
     vote_average: number;
   }[];
+  type: string;
 }
 
-export default function MediaList({ items }: MediaListProps) {
+export default function MediaList({ items, type }: MediaListProps) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -26,7 +27,7 @@ export default function MediaList({ items }: MediaListProps) {
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
     >
       {items.map((item, index) => (
-        <MediaCard item={item} index={index} key={index} />
+        <MediaCard item={item} index={index} key={index} type={type} />
       ))}
     </motion.div>
   );

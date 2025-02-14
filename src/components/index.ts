@@ -15,3 +15,11 @@ export { default as PopularCelebrities } from "./home/PopularCelebrities";
 export { default as TrendingMovies } from "./home/TrendingMovies";
 export { default as LatestReviews } from "./home/LatestReviews";
 export { default as Newsletter } from "./home/Newsletter";
+
+// MOVIE
+export { default as MovieBackdrop } from "./movie/MovieBackdrop";
+export { default as MoviePoster } from "./movie/MoviePoster";
+export { default as MovieDetailsGrid } from "./movie/MovieDetailsGrid";
+export { default as MovieOverview } from "./movie/MovieOverview";
+export { default as MovieGenres } from "./movie/MovieGenres";
+export { default as MovieProduction } from "./movie/MovieProduction";

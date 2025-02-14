@@ -5,10 +5,10 @@ import { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 // NEXT
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 // SERVICES
-import { getAllMovies, getTrendingMovies } from "@/services";
+import { getAllMovies, getTrendingMovies, getMovie } from "@/services";
 
 export const useGetAllMovies = () => {
   const searchParams = useSearchParams();
@@ -45,6 +45,18 @@ export const useGetTrendingMovies = () => {
   const { data, isPending } = useQuery({
     queryKey: ["trendingMovies"],
     queryFn: getTrendingMovies,
+  });
+
+  return { data, isPending };
+};
+
+export const useGetMovie = () => {
+  const { id } = useParams();
+  const movieId = Array.isArray(id) ? id[0] : id;
+
+  const { data, isPending } = useQuery({
+    queryKey: ["movie", id],
+    queryFn: () => getMovie(movieId as string),
   });
 
   return { data, isPending };

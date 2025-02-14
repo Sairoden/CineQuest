@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa";
 
 // NEXT
 import Image from "next/image";
+import Link from "next/link";
 
 interface MediaCardProps {
   item: {
@@ -17,9 +18,10 @@ interface MediaCardProps {
     vote_average: number;
   };
   index: number;
+  type: string;
 }
 
-export default function MediaCard({ item, index }: MediaCardProps) {
+export default function MediaCard({ item, index, type }: MediaCardProps) {
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + "...";
@@ -78,13 +80,17 @@ export default function MediaCard({ item, index }: MediaCardProps) {
           </p>
         </div>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full mt-6 bg-[#F76641] text-white px-6 py-3 rounded-xl hover:bg-opacity-90 transition duration-300 font-semibold"
+        <Link
+          href={type === "series" ? `/series/${item.id}` : `/movies/${item.id}`}
         >
-          View Details
-        </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full mt-6 bg-[#F76641] text-white px-6 py-3 rounded-xl hover:bg-opacity-90 transition duration-300 font-semibold"
+          >
+            View Details
+          </motion.button>
+        </Link>
       </div>
     </motion.div>
   );
