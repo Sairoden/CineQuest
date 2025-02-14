@@ -7,8 +7,8 @@ import { getPopularPeople } from "./apiPeople";
 export { getPopularPeople };
 
 // SERIES
-import { getAllSeries, getTopRatedSeries } from "./apiSeries";
-export { getAllSeries, getTopRatedSeries };
+import { getAllSeries, getTopRatedSeries, getSeries } from "./apiSeries";
+export { getAllSeries, getTopRatedSeries, getSeries };
 
 // AUTH
 import { loginWithGoogle, logout, getCurrentUser } from "./apiAuth";

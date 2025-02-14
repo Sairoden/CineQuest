@@ -6,7 +6,7 @@ export const GET = async (
   try {
     const { id } = await params;
 
-    const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+    const url = `https://api.themoviedb.org/3/tv/${id}?language=en-US`;
 
     const res = await fetch(url, {
       method: "GET",
@@ -17,13 +17,16 @@ export const GET = async (
     });
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch a movie: ${res.status}`);
+      throw new Error(`Failed to fetch a tv show: ${res.status}`);
     }
 
     const data = await res.json();
     return Response.json(data);
   } catch (err) {
-    console.error("Error fetching a movie:", err);
-    return Response.json({ error: "Failed to fetch a movie" }, { status: 500 });
+    console.error("Error fetching a tv show:", err);
+    return Response.json(
+      { error: "Failed to fetch a tv show" },
+      { status: 500 }
+    );
   }
 };

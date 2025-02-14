@@ -11,8 +11,12 @@ import { useGetPopularPeople } from "./usePeople";
 export { useGetPopularPeople };
 
 // SERIES
-import { useGetAllSeries, useGetTopRatedSeries } from "./useSeries";
-export { useGetAllSeries, useGetTopRatedSeries };
+import {
+  useGetAllSeries,
+  useGetTopRatedSeries,
+  useGetSeries,
+} from "./useSeries";
+export { useGetAllSeries, useGetTopRatedSeries, useGetSeries };
 
 // SERIES
 import { useLoginWithGoogle, useLogout, useGetCurrentUser } from "./useAuth";

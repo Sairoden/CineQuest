@@ -6,14 +6,15 @@ import { FaGlobe } from "react-icons/fa";
 import Image from "next/image";
 
 interface MoviePosterProps {
-  movie: {
+  items: {
     poster_path: string;
-    title: string;
+    title?: string;
+    name?: string;
     homepage?: string;
   };
 }
 
-export default function MoviePoster({ movie }: MoviePosterProps) {
+export default function DetailsPoster({ items }: MoviePosterProps) {
   return (
     <motion.div
       initial={{ x: -50, opacity: 0 }}
@@ -24,17 +25,21 @@ export default function MoviePoster({ movie }: MoviePosterProps) {
       <div className="flex flex-col gap-4 w-full max-w-[350px] md:max-w-none">
         <div className="relative group shadow-[0_0_30px_rgba(247,102,65,0.15)]">
           <Image
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
+            src={
+              items.poster_path
+                ? `https://image.tmdb.org/t/p/w500${items.poster_path}`
+                : "/noPoster.png"
+            }
+            alt={items.title || items.name || "No Title"}
             width={500}
             height={750}
             className="rounded-xl shadow-2xl transform transition-transform duration-300 group-hover:scale-[1.02] w-full"
           />
         </div>
 
-        {movie.homepage && (
+        {items.homepage && (
           <motion.a
-            href={movie.homepage}
+            href={items.homepage}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.02 }}

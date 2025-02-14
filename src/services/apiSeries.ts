@@ -42,3 +42,18 @@ export const getTopRatedSeries = async () => {
     throw err;
   }
 };
+
+export const getSeries = async (id: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/series/${id}`
+    );
+
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};

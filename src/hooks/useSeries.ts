@@ -5,10 +5,10 @@ import { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 // NEXT
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 // SERVICES
-import { getTopRatedSeries, getAllSeries } from "@/services";
+import { getTopRatedSeries, getAllSeries, getSeries } from "@/services";
 
 export const useGetAllSeries = () => {
   const searchParams = useSearchParams();
@@ -45,6 +45,18 @@ export const useGetTopRatedSeries = () => {
   const { data, isPending } = useQuery({
     queryKey: ["topRatedSeries"],
     queryFn: getTopRatedSeries,
+  });
+
+  return { data, isPending };
+};
+
+export const useGetSeries = () => {
+  const { id } = useParams();
+  const seriesId = Array.isArray(id) ? id[0] : id;
+
+  const { data, isPending } = useQuery({
+    queryKey: ["singleSeries", id],
+    queryFn: () => getSeries(seriesId as string),
   });
 
   return { data, isPending };

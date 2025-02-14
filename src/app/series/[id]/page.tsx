@@ -15,16 +15,16 @@ import {
 } from "@/components";
 
 // HOOKS
-import { useGetMovie } from "@/hooks";
+import { useGetSeries } from "@/hooks";
 
 export default function MovieDetailsPage() {
-  const { data: movie, isPending } = useGetMovie();
+  const { data: series, isPending } = useGetSeries();
 
   if (isPending) return <LoadingSpinner />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-[#2A2E3F] text-white py-28">
-      <DetailsBackdrop items={movie} />
+      <DetailsBackdrop items={series} />
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -33,7 +33,7 @@ export default function MovieDetailsPage() {
         className="container mx-auto px-4 py-16 relative"
       >
         <div className="flex flex-col md:flex-row gap-12">
-          <DetailsPoster items={movie} />
+          <DetailsPoster items={series} />
 
           {/* Details Section */}
           <motion.div
@@ -42,13 +42,13 @@ export default function MovieDetailsPage() {
             transition={{ delay: 0.5 }}
             className="md:w-2/3"
           >
-            <DetailsOverview items={movie} />
+            <DetailsOverview items={series} />
 
-            <DetailsDetailsGrid items={movie} />
+            <DetailsDetailsGrid items={series} />
 
-            <DetailsGenres items={movie} />
+            <DetailsGenres items={series} />
 
-            <DetailsProduction items={movie} />
+            <DetailsProduction items={series} />
           </motion.div>
         </div>
       </motion.div>
