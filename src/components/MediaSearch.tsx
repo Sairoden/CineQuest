@@ -2,17 +2,23 @@
 import { motion } from "framer-motion";
 import { FaSearch } from "react-icons/fa";
 
-interface MovieSearchProps {
+interface MediaSearchProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
+  placeholder: string;
 }
 
-export default function MovieSearch({
+export default function MediaSearch({
   handleSubmit,
   query,
   setQuery,
-}: MovieSearchProps) {
+  placeholder,
+}: MediaSearchProps) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery((e.target as HTMLInputElement).value);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -25,8 +31,8 @@ export default function MovieSearch({
           <input
             type="text"
             value={query}
-            onChange={e => setQuery(e.target.value)}
-            placeholder="Search for movies..."
+            onChange={handleChange}
+            placeholder={placeholder}
             className="w-full px-6 py-4 rounded-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#F76641]/50 text-lg placeholder-gray-400"
           />
 

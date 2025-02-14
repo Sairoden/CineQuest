@@ -59,7 +59,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/tv-shows"
+              href="/series"
               className="flex items-center text-gray-700 hover:text-[#F76641] transition-colors duration-300"
             >
               <FaTv className="mr-2" />
@@ -101,7 +101,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/tv-shows"
+              href="/series"
               className="flex items-center text-gray-700 hover:text-[#F76641] transition-colors duration-300"
             >
               <FaTv className="mr-2" />

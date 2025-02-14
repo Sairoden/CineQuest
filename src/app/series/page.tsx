@@ -20,7 +20,7 @@ import {
 // HOOKS
 import { useGetAllMovies } from "@/hooks";
 
-export default function MoviesPage() {
+export default function SeriesPage() {
   const [query, setQuery] = useState("");
   const { data, isPending } = useGetAllMovies();
   const searchParams = useSearchParams();
@@ -62,14 +62,14 @@ export default function MoviesPage() {
           animate={{ opacity: 1, x: 0 }}
           className="text-4xl font-bold text-white mb-8 tracking-tight"
         >
-          Discover Movies
+          Discover TV Shows
         </motion.h1>
 
         <MediaSearch
           handleSubmit={handleSubmit}
           query={query}
           setQuery={setQuery}
-          placeholder="Search for movies..."
+          placeholder="Search for tv shows..."
         />
 
         <MediaList items={movies} />

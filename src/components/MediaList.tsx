@@ -5,8 +5,8 @@ import { FaStar } from "react-icons/fa";
 // NEXT
 import Image from "next/image";
 
-interface MoviesListProps {
-  movies: {
+interface MediaListProps {
+  items: {
     id: number;
     title: string;
     overview: string;
@@ -16,7 +16,7 @@ interface MoviesListProps {
   }[];
 }
 
-export default function MoviesList({ movies }: MoviesListProps) {
+export default function MediaList({ items }: MediaListProps) {
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + "...";
@@ -29,9 +29,9 @@ export default function MoviesList({ movies }: MoviesListProps) {
       transition={{ duration: 0.5 }}
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
     >
-      {movies.map((movie, index) => (
+      {items.map((item, index) => (
         <motion.div
-          key={movie.id}
+          key={item.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -41,11 +41,11 @@ export default function MoviesList({ movies }: MoviesListProps) {
           <div className="relative aspect-[2/3]">
             <Image
               src={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                item.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
                   : "/noPoster.png"
               }
-              alt={movie.title}
+              alt={item.title}
               fill
               sizes="(max-width: 640px) 100vw, 
                      (max-width: 1024px) 50vw, 
@@ -56,11 +56,11 @@ export default function MoviesList({ movies }: MoviesListProps) {
               className="transition-transform duration-300 hover:scale-105 object-cover"
             />
 
-            {movie.vote_average && (
+            {item.vote_average && (
               <div className="absolute top-4 right-4 bg-[#F76641] rounded-full px-3 py-1 flex items-center gap-1">
                 <FaStar className="text-yellow-300" />
                 <span className="text-white font-semibold">
-                  {String(movie.vote_average?.toFixed(1))}
+                  {String(item.vote_average?.toFixed(1))}
                 </span>
               </div>
             )}
@@ -69,18 +69,18 @@ export default function MoviesList({ movies }: MoviesListProps) {
           <div className="p-6 flex flex-col flex-grow">
             <div className="flex-grow">
               <h3 className="text-xl font-bold text-white mb-2 line-clamp-1">
-                {movie.title}
+                {item.title}
               </h3>
 
               <p className="text-gray-400 text-sm mb-4">
-                {movie.release_date
-                  ? new Date(movie.release_date).getFullYear()
+                {item.release_date
+                  ? new Date(item.release_date).getFullYear()
                   : "No Date"}
               </p>
 
               <p className="text-gray-300 text-sm min-h-[4.5rem]">
-                {movie.overview
-                  ? truncateText(movie.overview, 80)
+                {item.overview
+                  ? truncateText(item.overview, 80)
                   : "No overview"}
               </p>
             </div>
