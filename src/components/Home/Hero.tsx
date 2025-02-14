@@ -95,7 +95,7 @@ export default function Hero() {
                 href="/movies"
                 className="group bg-white text-[#F76641] font-bold py-4 px-8 rounded-full inline-flex items-center text-lg relative overflow-hidden hover:text-white transition-colors duration-300"
               >
-                <span className="relative z-10 flex items-center">
+                <span className="relative flex items-center">
                   <FaPlay className="mr-2 transition-transform duration-300 group-hover:rotate-90" />
                   Begin Your CineQuest Journey
                 </span>

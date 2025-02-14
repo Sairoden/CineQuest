@@ -15,13 +15,50 @@ import {
   FaTv,
   FaBars,
   FaTimes,
+  FaSignOutAlt,
 } from "react-icons/fa";
 
+// HOOKS
+import { useGetCurrentUser, useLogout } from "@/hooks";
+
 export default function Navbar() {
+  const { user } = useGetCurrentUser();
+  const { logout, isPending } = useLogout();
+
+  console.log("MY USER", user);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleSignOut = () => {
+    logout();
+  };
+
+  const AuthButton = () => {
+    if (user)
+      return (
+        <button
+          onClick={handleSignOut}
+          disabled={isPending}
+          className="bg-[#F76641] text-white px-4 py-2 rounded-full hover:bg-opacity-80 transition duration-300 flex items-center justify-center"
+        >
+          <FaSignOutAlt className="mr-2" />
+          Sign Out
+        </button>
+      );
+
+    return (
+      <Link
+        href="/login"
+        className="bg-[#F76641] text-white px-4 py-2 rounded-full hover:bg-opacity-80 transition duration-300 flex items-center justify-center"
+      >
+        <FaUserPlus className="mr-2" />
+        Sign in
+      </Link>
+    );
   };
 
   return (
@@ -74,10 +111,7 @@ export default function Navbar() {
               Watchlist
             </Link>
 
-            <button className="bg-[#F76641] text-white px-4 py-2 rounded-full hover:bg-opacity-80 transition duration-300 flex items-center">
-              <FaUserPlus className="mr-2" />
-              Sign Up
-            </button>
+            <AuthButton />
           </div>
         </div>
 
@@ -116,10 +150,7 @@ export default function Navbar() {
               Watchlist
             </Link>
 
-            <button className="bg-[#F76641] text-white px-4 py-2 rounded-full hover:bg-opacity-80 transition duration-300 flex items-center justify-center">
-              <FaUserPlus className="mr-2" />
-              Sign Up
-            </button>
+            <AuthButton />
           </div>
         </motion.div>
       </div>

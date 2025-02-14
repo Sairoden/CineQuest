@@ -36,9 +36,11 @@ export default function RootLayout({
       >
         <ScrollTransition />
 
-        <Navbar />
+        <Providers>
+          <Navbar />
 
-        <Providers>{children}</Providers>
+          {children}
+        </Providers>
 
         <Footer />
       </body>
