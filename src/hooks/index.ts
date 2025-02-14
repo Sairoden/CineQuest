@@ -7,5 +7,5 @@ import { useGetPopularPeople } from "./usePeople";
 export { useGetPopularPeople };
 
 // SERIES
-import { useGetTopRatedSeries } from "./useSeries";
-export { useGetTopRatedSeries };
+import { useGetAllSeries, useGetTopRatedSeries } from "./useSeries";
+export { useGetAllSeries, useGetTopRatedSeries };

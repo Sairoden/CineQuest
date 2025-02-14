@@ -6,6 +6,6 @@ export { getAllMovies, getTrendingMovies };
 import { getPopularPeople } from "./apiPeople";
 export { getPopularPeople };
 
-// PEOPLE
-import { getTopRatedSeries } from "./apiSeries";
-export { getTopRatedSeries };
+// SERIES
+import { getAllSeries, getTopRatedSeries } from "./apiSeries";
+export { getAllSeries, getTopRatedSeries };

@@ -18,11 +18,11 @@ import {
 } from "@/components";
 
 // HOOKS
-import { useGetAllMovies } from "@/hooks";
+import { useGetAllSeries } from "@/hooks";
 
 export default function SeriesPage() {
   const [query, setQuery] = useState("");
-  const { data, isPending } = useGetAllMovies();
+  const { data, isPending } = useGetAllSeries();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -31,7 +31,7 @@ export default function SeriesPage() {
     return <LoadingSpinner />;
   }
 
-  const { page = 1, results: movies = [], total_pages: totalPages = 1 } = data;
+  const { page = 1, results: series = [], total_pages: totalPages = 1 } = data;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,7 +72,7 @@ export default function SeriesPage() {
           placeholder="Search for tv shows..."
         />
 
-        <MediaList items={movies} />
+        <MediaList items={series} />
 
         <Paginations
           totalPages={totalPages}

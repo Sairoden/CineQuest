@@ -8,10 +8,12 @@ import Image from "next/image";
 interface MediaListProps {
   items: {
     id: number;
-    title: string;
+    title?: string;
+    name?: string;
     overview: string;
     poster_path: string;
-    release_date: string;
+    release_date?: string;
+    first_air_date?: string;
     vote_average: number;
   }[];
 }
@@ -45,7 +47,7 @@ export default function MediaList({ items }: MediaListProps) {
                   ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
                   : "/noPoster.png"
               }
-              alt={item.title}
+              alt={item.title || item.name || "No title available"}
               fill
               sizes="(max-width: 640px) 100vw, 
                      (max-width: 1024px) 50vw, 
@@ -69,13 +71,13 @@ export default function MediaList({ items }: MediaListProps) {
           <div className="p-6 flex flex-col flex-grow">
             <div className="flex-grow">
               <h3 className="text-xl font-bold text-white mb-2 line-clamp-1">
-                {item.title}
+                {item.title || item.name || "No title available"}
               </h3>
 
               <p className="text-gray-400 text-sm mb-4">
-                {item.release_date
-                  ? new Date(item.release_date).getFullYear()
-                  : "No Date"}
+                {new Date(item.release_date ?? "No Date").getFullYear() ||
+                  new Date(item.first_air_date ?? "No Date").getFullYear() ||
+                  "No Date"}
               </p>
 
               <p className="text-gray-300 text-sm min-h-[4.5rem]">
