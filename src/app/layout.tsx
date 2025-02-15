@@ -1,11 +1,21 @@
-// NEXT
+// app/layout.tsx
 import type { Metadata } from "next";
-
-// STYLES
 import "./globals.css";
+import dynamic from "next/dynamic";
 
-// COMPONENTS
-import { Footer, ScrollTransition, Navbar, Providers } from "@/components";
+// Dynamically import components that might use document
+const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
+const ScrollTransition = dynamic(
+  () => import("@/components/ScrollTransition"),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
+
+// Import Providers normally since it doesn't use document
+import Providers from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: "CineQuest",
@@ -21,11 +31,8 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <Providers>
           <Navbar />
-
+          <main>{children}</main>
           <ScrollTransition />
-
-          {children}
-
           <Footer />
         </Providers>
       </body>
