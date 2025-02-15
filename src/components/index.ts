@@ -7,6 +7,7 @@ export { default as LoadingSpinner } from "./LoadingSpinner";
 export { default as MediaSearch } from "./MediaSearch";
 export { default as MediaList } from "./MediaList";
 export { default as MediaCard } from "./MediaCard";
+export { default as LayoutWrapper } from "./LayoutWrapper";
 
 // HOME
 export { default as Hero } from "./Hero";
