@@ -1,3 +1,5 @@
+"use client";
+
 // REACT
 import { Suspense } from "react";
 

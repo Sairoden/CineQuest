@@ -1,3 +1,5 @@
+"use client";
+
 // LIBRARIES
 import { useQuery } from "@tanstack/react-query";
 

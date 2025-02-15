@@ -23,13 +23,16 @@ export { default as DetailsDetailsGrid } from "./DetailsGrid";
 export { default as DetailsOverview } from "./DetailsOverview";
 export { default as DetailsGenres } from "./DetailsGenres";
 export { default as DetailsProduction } from "./DetailsProduction";
+export { default as MoviesContent } from "./MoviesContent";
+export { default as SeriesContent } from "./SeriesContent";
 
 // WATCHLIST
 export { default as WatchlistGrid } from "./WatchlistGrid";
 export { default as NoUserWatchlist } from "./NoUserWatchlist";
 export { default as NoWatchlist } from "./NoWatchlist";
+export { default as WatchlistContent } from "./WatchlistContent";
 
-// WATCHLIST
+// CELEBRITIES
 export { default as CelebrityMedia } from "./CelebrityMedia";
 export { default as CelebrityInfo } from "./CelebrityInfo";
 export { default as CelebrityPoster } from "./CelebrityPoster";
