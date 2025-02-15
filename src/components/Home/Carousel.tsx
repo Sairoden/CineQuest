@@ -9,13 +9,13 @@ import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
 
 // NEXT
 import Image from "next/image";
+import Link from "next/link";
 
 // HOOKS
 import { useGetTopRatedSeries } from "@/hooks";
 
 // COMPONENTS
 import { LoadingSpinner } from "@/components";
-import Link from "next/link";
 
 export default function Carousel() {
   const { data, isPending } = useGetTopRatedSeries();

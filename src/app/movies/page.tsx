@@ -1,7 +1,7 @@
 "use client";
 
 // REACT
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
 // NEXT
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
@@ -22,6 +22,14 @@ import {
 import { useGetAllMovies } from "@/hooks";
 
 export default function MoviesPage() {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <MoviesContent />
+    </Suspense>
+  );
+}
+
+function MoviesContent() {
   const [query, setQuery] = useState("");
   const { data, isPending } = useGetAllMovies();
   const searchParams = useSearchParams();

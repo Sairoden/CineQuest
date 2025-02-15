@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CineQuest
 
-## Getting Started
+## Setup Instructions
 
-First, run the development server:
+1. **Get the code**
 
-```bash
+# Clone the repository
+
+git clone https://github.com/Sairoden/CineQuest.git
+
+# OR
+
+Download ZIP from https://github.com/Sairoden/CineQuest
+
+# Install dependencies
+
+npm install
+
+2. **Environment Setup**
+
+- Request `.env.development` and `.env.production` files from the project owner
+- After receiving the files, place them in the root directory
+- For environment variables reference, check `.env.example` in the repository
+
+3. **Run the Application**
+
+# Development mode
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Production build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+npm run build
+npm start
 
-## Learn More
+Production: [cinequest-sairoden.vercel.app](https://cinequest-sairoden.vercel.app)
 
-To learn more about Next.js, take a look at the following resources:
+## Limitations & Assumptions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- TMDB API rate limits (45 requests/second)
+- Maximum 20 items per carousel/list
+- Single authentication method (Google only)
+- No offline support
+- Limited sorting and filtering options
+- Basic watchlist functionality
+- API-dependent load times
+- Image quality depends on TMDB's available resources
+- More content details per page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Implemented Stretch Goals
 
-## Deploy on Vercel
+### Authentication & Security
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Google OAuth integration
+- Protected routes
+- Secure API handling
+- Environment variable protection
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Core Features
+
+- NextJS server API implementation
+- Mobile responsiveness support
+- Animations and transition effects
+- Carousels
+- Real-time updates
+- Personal watchlist
+- Movie/Series/Celebrity pages with details
+- Trending sections
+- TanStack Query for efficient data caching
+- Paginations
+- Search query
+
+### Technical Implementation
+
+- TypeScript & clean code architecture
+- Best practices & Comments
+- SEO and performance optimization
+- Component reusability
+- Client API usage
+- Responsive design across devices
+- Loading states and error handling

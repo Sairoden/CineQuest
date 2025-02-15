@@ -1,7 +1,7 @@
 "use client";
 
 // REACT
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
 // NEXT
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
@@ -22,6 +22,14 @@ import {
 import { useGetAllSeries } from "@/hooks";
 
 export default function SeriesPage() {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <SeriesContent />
+    </Suspense>
+  );
+}
+
+function SeriesContent() {
   const [query, setQuery] = useState("");
   const { data, isPending } = useGetAllSeries();
   const searchParams = useSearchParams();
