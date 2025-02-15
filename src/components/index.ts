@@ -15,6 +15,7 @@ export { default as PopularCelebrities } from "./home/PopularCelebrities";
 export { default as TrendingMovies } from "./home/TrendingMovies";
 export { default as LatestReviews } from "./home/LatestReviews";
 export { default as Newsletter } from "./home/Newsletter";
+export { default as HomeContainer } from "./home/HomeContainer";
 
 // MOVIES / SERIES
 export { default as DetailsBackdrop } from "./DetailsBackdrop";
