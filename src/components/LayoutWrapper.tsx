@@ -3,7 +3,9 @@
 import dynamic from "next/dynamic";
 
 const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
-const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
+const Footer = dynamic(() => import("@/components/home/Footer"), {
+  ssr: false,
+});
 const ScrollTransition = dynamic(
   () => import("@/components/ScrollTransition"),
   {
