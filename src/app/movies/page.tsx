@@ -28,7 +28,6 @@ export default function MoviesPage() {
     </Suspense>
   );
 }
-
 function MoviesContent() {
   const [query, setQuery] = useState("");
   const { data, isPending } = useGetAllMovies();
