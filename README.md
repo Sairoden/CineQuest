@@ -35,7 +35,7 @@ Visit [http://localhost:3000](http://localhost:3000)
 npm run build
 npm start
 
-Production: [cinequest-sairoden.vercel.app](https://cinequest-sairoden.vercel.app)
+Production: [cinequest-sairoden.vercel.app](https://sairoden-cinequest.vercel.app)
 
 ## Limitations & Assumptions
 
