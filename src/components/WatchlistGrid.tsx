@@ -1,3 +1,5 @@
+"use client";
+
 // COMPONENTS
 import { MediaList } from "@/components";
 

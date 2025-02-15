@@ -1,3 +1,5 @@
+"use client";
+
 // STYLES
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaClock, FaDollarSign } from "react-icons/fa";

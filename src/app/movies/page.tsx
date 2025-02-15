@@ -7,7 +7,7 @@ import { useState, Suspense } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 // STYLES
-import { motion } from "framer-motion";
+import { LazyMotion, domAnimation, motion } from "framer-motion";
 import { FaFilm } from "react-icons/fa";
 
 // COMPONENTS
@@ -23,11 +23,14 @@ import { useGetAllMovies } from "@/hooks";
 
 export default function MoviesPage() {
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <MoviesContent />
-    </Suspense>
+    <LazyMotion features={domAnimation}>
+      <Suspense fallback={<LoadingSpinner />}>
+        <MoviesContent />
+      </Suspense>
+    </LazyMotion>
   );
 }
+
 function MoviesContent() {
   const [query, setQuery] = useState("");
   const { data, isPending } = useGetAllMovies();

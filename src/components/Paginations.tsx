@@ -1,5 +1,4 @@
-// REACT
-import React from "react";
+"use client";
 
 // STYLES
 import { motion } from "framer-motion";

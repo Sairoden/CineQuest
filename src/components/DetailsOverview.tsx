@@ -1,3 +1,5 @@
+"use client";
+
 // STYLES
 import { FaStar } from "react-icons/fa";
 

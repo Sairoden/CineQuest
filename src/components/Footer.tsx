@@ -1,3 +1,5 @@
+"use client";
+
 // STYLES
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 

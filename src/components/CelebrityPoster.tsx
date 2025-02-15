@@ -1,3 +1,5 @@
+"use client";
+
 // NEXT
 import Image from "next/image";
 
