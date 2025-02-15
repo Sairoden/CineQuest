@@ -6,13 +6,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "m.media-amazon.com",
-        port: "",
-        pathname: "/images/**",
-        search: "",
-      },
-      {
-        protocol: "https",
         hostname: "picsum.photos",
         port: "",
         pathname: "/**",
@@ -20,12 +13,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "image.tmdb.org",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "placehold.co",
         port: "",
         pathname: "/**",
       },

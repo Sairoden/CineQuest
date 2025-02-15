@@ -2,6 +2,7 @@
 
 // NEXT
 import Image from "next/image";
+import Link from "next/link";
 
 // STYLES
 import { motion } from "framer-motion";
@@ -63,10 +64,6 @@ export default function TrendingMovies() {
                     }
                     alt={movie.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, 
-                         (max-width: 1024px) 50vw, 
-                         (max-width: 1280px) 33vw,
-                         25vw"
                     quality={85}
                     priority={index < 4}
                     className="transition-transform duration-300 hover:scale-105 object-cover"
@@ -98,13 +95,15 @@ export default function TrendingMovies() {
                     </span>
                   </div>
 
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-full mt-6 bg-[#F76641] text-white px-6 py-3 rounded-xl hover:bg-opacity-90 transition duration-300 font-semibold"
-                  >
-                    View Details
-                  </motion.button>
+                  <Link href={`/movies/${movie.id}`}>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full mt-6 bg-[#F76641] text-white px-6 py-3 rounded-xl hover:bg-opacity-90 transition duration-300 font-semibold"
+                    >
+                      View Details
+                    </motion.button>
+                  </Link>
                 </div>
               </motion.div>
             )

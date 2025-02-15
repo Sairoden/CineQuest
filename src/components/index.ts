@@ -28,3 +28,10 @@ export { default as DetailsProduction } from "./DetailsProduction";
 export { default as WatchlistGrid } from "./watchlist/WatchlistGrid";
 export { default as NoUserWatchlist } from "./watchlist/NoUserWatchlist";
 export { default as NoWatchlist } from "./watchlist/NoWatchlist";
+
+// WATCHLIST
+export { default as CelebrityMedia } from "./celebrities/CelebrityMedia";
+export { default as CelebrityInfo } from "./celebrities/CelebrityInfo";
+export { default as CelebrityPoster } from "./celebrities/CelebrityPoster";
+export { default as CelebrityBiography } from "./celebrities/CelebrityBiography";
+export { default as CelebrityDetails } from "./celebrities/CelebrityDetails";

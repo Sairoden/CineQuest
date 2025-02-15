@@ -8,8 +8,8 @@ import {
 export { getAllMovies, getTrendingMovies, getMovie, postMovie };
 
 // PEOPLE
-import { getPopularPeople } from "./apiPeople";
-export { getPopularPeople };
+import { getPopularPeople, getPeople } from "./apiPeople";
+export { getPopularPeople, getPeople };
 
 // SERIES
 import {

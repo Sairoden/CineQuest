@@ -8,8 +8,8 @@ import {
 export { useGetAllMovies, useGetTrendingMovies, useGetMovie, usePostMovie };
 
 // PEOPLE
-import { useGetPopularPeople } from "./usePeople";
-export { useGetPopularPeople };
+import { useGetPopularPeople, useGetPeople } from "./usePeople";
+export { useGetPopularPeople, useGetPeople };
 
 // SERIES
 import {

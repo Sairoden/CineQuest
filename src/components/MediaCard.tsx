@@ -45,10 +45,6 @@ export default function MediaCard({ item, index, type }: MediaCardProps) {
           }
           alt={item.title || item.name || "No title available"}
           fill
-          sizes="(max-width: 640px) 100vw, 
-               (max-width: 1024px) 50vw, 
-               (max-width: 1280px) 33vw,
-               25vw"
           quality={85}
           priority={index < 4}
           className="transition-transform duration-300 hover:scale-105 object-cover"

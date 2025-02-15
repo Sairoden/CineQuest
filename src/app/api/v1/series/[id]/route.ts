@@ -1,4 +1,3 @@
-// route.ts
 export const GET = async (
   req: Request,
   { params }: { params: Promise<{ id: string }> }

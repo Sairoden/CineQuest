@@ -15,6 +15,7 @@ import { useGetTopRatedSeries } from "@/hooks";
 
 // COMPONENTS
 import { LoadingSpinner } from "@/components";
+import Link from "next/link";
 
 export default function Carousel() {
   const { data, isPending } = useGetTopRatedSeries();
@@ -93,13 +94,12 @@ export default function Carousel() {
               exit="exit"
               className="w-full"
             >
-              <div className="relative aspect-[16/9] md:aspect-[21/9] w-full">
+              <div className="relative aspect-[16/10] md:aspect-[21/10] w-full">
                 <Image
                   src={`https://image.tmdb.org/t/p/original${data?.results[currentIndex].poster_path}`}
                   alt={data?.results[currentIndex].name}
-                  layout="fill"
+                  fill
                   objectFit="cover"
-                  className=""
                   priority
                 />
 
@@ -127,16 +127,27 @@ export default function Carousel() {
                   </div>
 
                   <p className="hidden md:block text-base md:text-lg lg:text-xl mb-4 md:mb-8 max-w-3xl opacity-90">
-                    {data?.results[currentIndex].overview}
+                    {data?.results[currentIndex].overview.length > 600
+                      ? `${data?.results[currentIndex].overview
+                          .slice(0, 600)
+                          .split(" ")
+                          .slice(0, -1)
+                          .join(" ")}...`
+                      : data?.results[currentIndex].overview}
                   </p>
 
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-[#F76641] text-white px-4 py-2 md:px-10 md:py-5 rounded-full text-sm md:text-xl font-semibold hover:bg-[#2A2E3F] transition duration-300 flex items-center gap-2 md:gap-3"
+                  <Link
+                    href={`/series/${data?.results[currentIndex].id}`}
+                    passHref
                   >
-                    View Details
-                  </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="bg-[#F76641] text-white px-4 py-2 md:px-10 md:py-5 rounded-full text-sm md:text-xl font-semibold hover:bg-[#2A2E3F] transition duration-300 flex items-center gap-2 md:gap-3"
+                    >
+                      View Details
+                    </motion.button>
+                  </Link>
                 </motion.div>
               </div>
             </motion.div>

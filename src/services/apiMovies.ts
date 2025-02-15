@@ -74,8 +74,6 @@ export const postMovie = async (movie: {
   type: string;
 }) => {
   try {
-    console.log("MY MOVIE", movie);
-
     const { error } = await supabase.from("watchlist").insert(movie);
 
     if (error) throw error;
