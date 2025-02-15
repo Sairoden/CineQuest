@@ -1,3 +1,6 @@
+// SERVICES
+import { supabase } from "@/services";
+
 export const getAllMovies = async ({
   page,
   query,
@@ -52,6 +55,30 @@ export const getMovie = async (id: string) => {
     const data = await res.json();
 
     return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const postMovie = async (movie: {
+  title?: string;
+  overview: string;
+  poster_path: string;
+  release_date?: string;
+  vote_average: number;
+  name?: string;
+  first_air_date?: string;
+  tmdbID: number;
+  userId: string;
+  type: string;
+}) => {
+  try {
+    console.log("MY MOVIE", movie);
+
+    const { error } = await supabase.from("watchlist").insert(movie);
+
+    if (error) throw error;
   } catch (err) {
     console.error(err);
     throw err;

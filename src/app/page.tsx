@@ -31,3 +31,9 @@ export default function HomePage() {
     </div>
   );
 }
+
+// TO DO
+// 1. REMOVE WATCH LIST
+// 2. IF THERE IS NO MOVIE FOUND, DISPLAY SOMETHING ELSE
+// 3. FILTERS IF THERE IS STILL TIME
+// 4. Watchlist details connect to specific details page

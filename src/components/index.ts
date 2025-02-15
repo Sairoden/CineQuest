@@ -16,10 +16,15 @@ export { default as TrendingMovies } from "./home/TrendingMovies";
 export { default as LatestReviews } from "./home/LatestReviews";
 export { default as Newsletter } from "./home/Newsletter";
 
-// MOVIE
+// MOVIES / SERIES
 export { default as DetailsBackdrop } from "./DetailsBackdrop";
 export { default as DetailsPoster } from "./DetailsPoster";
 export { default as DetailsDetailsGrid } from "./DetailsGrid";
 export { default as DetailsOverview } from "./DetailsOverview";
 export { default as DetailsGenres } from "./DetailsGenres";
 export { default as DetailsProduction } from "./DetailsProduction";
+
+// WATCHLIST
+export { default as WatchlistGrid } from "./watchlist/WatchlistGrid";
+export { default as NoUserWatchlist } from "./watchlist/NoUserWatchlist";
+export { default as NoWatchlist } from "./watchlist/NoWatchlist";

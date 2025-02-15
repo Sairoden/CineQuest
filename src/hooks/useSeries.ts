@@ -2,13 +2,18 @@
 import { useEffect } from "react";
 
 // LIBRARIES
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 
 // NEXT
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
 
 // SERVICES
-import { getTopRatedSeries, getAllSeries, getSeries } from "@/services";
+import {
+  getTopRatedSeries,
+  getAllSeries,
+  getSeries,
+  postSeries as postSeriesApi,
+} from "@/services";
 
 export const useGetAllSeries = () => {
   const searchParams = useSearchParams();
@@ -60,4 +65,30 @@ export const useGetSeries = () => {
   });
 
   return { data, isPending };
+};
+
+export const usePostSeries = () => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const { mutate: postSeries, isPending } = useMutation({
+    mutationFn: (series: {
+      title?: string;
+      overview: string;
+      poster_path: string;
+      release_date?: string;
+      vote_average: number;
+      name?: string;
+      first_air_date?: string;
+      tmdbID: number;
+      userId: string;
+      type: string;
+    }) => postSeriesApi(series),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["watchlist"] });
+      router.push("/watchlist");
+    },
+  });
+
+  return { postSeries, isPending };
 };

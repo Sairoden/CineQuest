@@ -2,13 +2,18 @@
 import { useEffect } from "react";
 
 // LIBRARIES
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 
 // NEXT
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
 
 // SERVICES
-import { getAllMovies, getTrendingMovies, getMovie } from "@/services";
+import {
+  getAllMovies,
+  getTrendingMovies,
+  getMovie,
+  postMovie as postMovieApi,
+} from "@/services";
 
 export const useGetAllMovies = () => {
   const searchParams = useSearchParams();
@@ -60,4 +65,30 @@ export const useGetMovie = () => {
   });
 
   return { data, isPending };
+};
+
+export const usePostMovie = () => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const { mutate: postMovie, isPending } = useMutation({
+    mutationFn: (movie: {
+      title?: string;
+      overview: string;
+      poster_path: string;
+      release_date?: string;
+      vote_average: number;
+      name?: string;
+      first_air_date?: string;
+      tmdbID: number;
+      userId: string;
+      type: string;
+    }) => postMovieApi(movie),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["watchlist"] });
+      router.push("/watchlist");
+    },
+  });
+
+  return { postMovie, isPending };
 };

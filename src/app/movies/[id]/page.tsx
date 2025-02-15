@@ -1,5 +1,8 @@
 "use client";
 
+// NEXT
+import { useRouter } from "next/navigation";
+
 // STYLES
 import { motion } from "framer-motion";
 
@@ -15,12 +18,59 @@ import {
 } from "@/components";
 
 // HOOKS
-import { useGetMovie } from "@/hooks";
+import {
+  useGetMovie,
+  usePostMovie,
+  useGetCurrentUser,
+  useGetAllWatchlist,
+  useDeleteWatchlist,
+} from "@/hooks";
 
 export default function MovieDetailsPage() {
   const { data: movie, isPending } = useGetMovie();
+  const { postMovie, isPending: postMoviePending } = usePostMovie();
+  const { user }: { user: { id?: string } | null } = useGetCurrentUser();
+  const { watchlist, isPending: watchlistPending } = useGetAllWatchlist();
+  const { deleteWatchlist, isPending: deleteWatchlistPending } =
+    useDeleteWatchlist();
 
-  if (isPending) return <LoadingSpinner />;
+  const isInWatchlist =
+    (user && watchlist?.some(item => item.tmdbID === movie?.id)) ?? false;
+
+  const router = useRouter();
+
+  const handleWatchlist = () => {
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
+    if (user?.id === undefined) {
+      console.error("User ID is undefined");
+      return;
+    }
+
+    const watchlistMovie = {
+      title: movie.title,
+      overview: movie.overview,
+      poster_path: movie.poster_path,
+      release_date: movie.release_date,
+      vote_average: movie.vote_average,
+      type: "movie",
+      tmdbID: movie.id,
+      userId: user.id,
+    };
+
+    postMovie(watchlistMovie);
+  };
+
+  const handleRemoveWatchlist = () => {
+    if (!movie.id) return;
+
+    deleteWatchlist(movie.id);
+  };
+
+  if (isPending || watchlistPending) return <LoadingSpinner />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-[#2A2E3F] text-white py-28">
@@ -33,7 +83,14 @@ export default function MovieDetailsPage() {
         className="container mx-auto px-4 py-16 relative"
       >
         <div className="flex flex-col md:flex-row gap-12">
-          <DetailsPoster items={movie} />
+          <DetailsPoster
+            items={movie}
+            onWatchlist={handleWatchlist}
+            isPending={postMoviePending}
+            isInWatchlist={isInWatchlist}
+            deleteWatchlistPending={deleteWatchlistPending}
+            onRemoveWatchlist={handleRemoveWatchlist}
+          />
 
           {/* Details Section */}
           <motion.div

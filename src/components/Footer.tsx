@@ -7,9 +7,9 @@ export default function Footer() {
   const quickLinks = [
     { name: "Home", path: "/" },
     { name: "Movies", path: "/movies" },
-    { name: "TV Shows", path: "/tv-shows" },
-    { name: "About Us", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: "TV Shows", path: "/series" },
+    { name: "About Us", path: "#" },
+    { name: "Contact", path: "#" },
   ];
 
   const socialLinks = [
@@ -17,6 +17,11 @@ export default function Footer() {
     { icon: <FaTwitter />, url: "#", name: "Twitter" },
     { icon: <FaInstagram />, url: "#", name: "Instagram" },
     { icon: <FaYoutube />, url: "#", name: "YouTube" },
+  ];
+
+  const policies = [
+    { name: "Privacy Policy", path: "#" },
+    { name: "Terms of Service", path: "#" },
   ];
 
   return (
@@ -91,19 +96,15 @@ export default function Footer() {
             </p>
 
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a
-                href="/privacy"
-                className="text-sm text-gray-400 hover:text-[#F76641]"
-              >
-                Privacy Policy
-              </a>
-
-              <a
-                href="/terms"
-                className="text-sm text-gray-400 hover:text-[#F76641]"
-              >
-                Terms of Service
-              </a>
+              {policies.map(policy => (
+                <a
+                  key={policy.name}
+                  href={policy.path}
+                  className="text-sm text-gray-400 hover:text-[#F76641]"
+                >
+                  {policy.name}
+                </a>
+              ))}
             </div>
           </div>
         </div>

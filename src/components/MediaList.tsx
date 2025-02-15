@@ -14,6 +14,7 @@ interface MediaListProps {
     release_date?: string;
     first_air_date?: string;
     vote_average: number;
+    tmdbID: number;
   }[];
   type: string;
 }

@@ -16,6 +16,7 @@ interface MediaCardProps {
     release_date?: string;
     first_air_date?: string;
     vote_average: number;
+    tmdbID: number;
   };
   index: number;
   type: string;
@@ -81,7 +82,11 @@ export default function MediaCard({ item, index, type }: MediaCardProps) {
         </div>
 
         <Link
-          href={type === "series" ? `/series/${item.id}` : `/movies/${item.id}`}
+          href={
+            type === "series"
+              ? `/series/${item.tmdbID ? item.tmdbID : item.id}`
+              : `/movies/${item.tmdbID ? item.tmdbID : item.id}`
+          }
         >
           <motion.button
             whileHover={{ scale: 1.05 }}

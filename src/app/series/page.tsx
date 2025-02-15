@@ -8,6 +8,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 // STYLES
 import { motion } from "framer-motion";
+import { FaTv } from "react-icons/fa";
 
 // COMPONENTS
 import {
@@ -48,6 +49,7 @@ export default function SeriesPage() {
 
   const handlePage = (page: number) => {
     const params = new URLSearchParams(searchParams);
+
     params.set("page", String(page));
     router.replace(`${pathname}?${params.toString()}`);
   };
@@ -70,13 +72,38 @@ export default function SeriesPage() {
           placeholder="Search for tv shows..."
         />
 
-        <MediaList items={series} type="series" />
+        {series.length > 0 ? (
+          <>
+            <MediaList items={series} type="series" />
 
-        <Paginations
-          totalPages={totalPages}
-          currentPage={page}
-          handlePage={handlePage}
-        />
+            <Paginations
+              totalPages={totalPages}
+              currentPage={page}
+              handlePage={handlePage}
+            />
+          </>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center justify-center py-20 px-4 text-center"
+          >
+            <div className="bg-[#F76641]/10 rounded-full p-6 mb-6 inline-block">
+              <FaTv className="text-[#F76641] text-4xl" />
+            </div>
+
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              No TV Shows Found
+            </h2>
+
+            <p className="text-gray-400 text-lg max-w-md">
+              {query
+                ? `No results found for "${query}". Try different keywords or browse our TV shows collection.`
+                : "No TV shows available at the moment. Try searching for something specific."}
+            </p>
+          </motion.div>
+        )}
       </div>
     </div>
   );
